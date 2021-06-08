@@ -11,7 +11,7 @@ We can only feature one awesome programmer at a time.
 Find comments below to help you along.
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 // Use this variable ONLY to initialize a slice of state!
 // There is something in the JSX right now breaking this rule...
@@ -25,6 +25,8 @@ export const listOfAwesome = [
 ];
 
 export default function Programmers() {
+  const[programmers, setProgrammers] = useState(listOfAwesome)
+  const[id, setId] = useState(null)
   // We'll have to use the state hook twice, as we need two slices of state.
   // The programmers list on the one hand, and the id of the featured programmer on the other.
 
@@ -39,7 +41,7 @@ export default function Programmers() {
   const style = {
     fontSize: '1.5em',
     marginTop: '0.5em',
-    color: 'royalblue', // 🤔 color turns to gold, when celebrating
+    color:  id === programmers ? 'gold' : 'royalblue' // 🤔 color turns to gold, when celebrating
   };
 
   return (
@@ -62,9 +64,9 @@ export default function Programmers() {
           // Ternaries are fantastic to render "one thing or the other" depending on the "truthiness" of something.
           // Pseudo-code: if the currently featured id is truthy render text 1, otherwise render text 2.
           // Replace the hard-coded false with the correct variable.
-          false
-            ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳`
-            : 'Pick an awesome programmer'
+          programmers === id ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳` : 'Pick an awesome programmer'
+            
+            
         }
       </div>
     </div>
